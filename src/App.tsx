@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import './App.css'
-import {Route, Routes} from "react-router-dom";
+import {Link, Route, Routes} from "react-router-dom";
 import ToDoList from "./ToDoList.tsx";
 import axios from "axios";
 
@@ -11,7 +11,7 @@ function App() {
 
     const fetchData = () => {
         //axios.get(`https://rickandmortyapi.com/api/character/?page=${pageId}`)
-        axios.get("https://localhost:8080/api/todo")
+        axios.get("/api/todo")
             .then((response) => setTodo(response.data))
             .catch(error => {
                 console.error("Error information:", error)
@@ -28,8 +28,9 @@ function App() {
     return (
         <>
             <h1>ToDoList</h1>
+            <Link to={"/api/todolist"}>Home</Link>
             <Routes>
-                <Route path="/api" element={<ToDoList/>}/>
+                <Route path="/api/todolist" element={<ToDoList/>}/>
             </Routes>
 
         </>
