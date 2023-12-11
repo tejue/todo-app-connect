@@ -5,6 +5,7 @@ import ToDoList from "./ToDoList.tsx";
 import axios from "axios";
 import TodoGallery from './TodoGallery.tsx';
 import {Todo} from "./Todo.ts";
+import TodoForm from "./TodoForm.tsx";
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
         }, []
     )
 
+    function addNewTodo(newTodo: Todo) {
+        setTodo([...todos, newTodo])
+    }
 
     return (
         <>
@@ -38,6 +42,8 @@ function App() {
                 {todos.map((todo: Todo) =>
                     <TodoGallery description={todo.description} status={todo.status}/>)
                 }</p>
+            <TodoForm addNewTodo={addNewTodo}/>
+
         </>
     )
 }
