@@ -28,7 +28,13 @@ function App() {
     )
 
     function addNewTodo(newTodo: Todo) {
-        setTodo([...todos, newTodo])
+        axios.post("api/todo", newTodo)
+            .then((response) => {
+                setTodo([...todos, response.data])
+            })
+            .catch(error => {
+                console.error("Error information:", error)
+            });
     }
 
     return (
