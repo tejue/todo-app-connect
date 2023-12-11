@@ -3,11 +3,13 @@ import './App.css'
 import {Link, Route, Routes} from "react-router-dom";
 import ToDoList from "./ToDoList.tsx";
 import axios from "axios";
+import TodoGallery from './TodoGallery.tsx';
+import {Todo} from "./Todo.ts";
 
 
 function App() {
 
-    const [todo, setTodo] = useState<object[]>([])
+    const [todos, setTodo] = useState<Todo[]>([])
 
     const fetchData = () => {
         //axios.get(`https://rickandmortyapi.com/api/character/?page=${pageId}`)
@@ -28,11 +30,14 @@ function App() {
     return (
         <>
             <h1>ToDoList</h1>
-            <Link to={"/api/todolist"}>Home</Link>
+            <Link to={"/todolist"}>Home</Link>
             <Routes>
-                <Route path="/api/todolist" element={<ToDoList/>}/>
+                <Route path="/todolist" element={<ToDoList/>}/>
             </Routes>
-
+            <p>
+                {todos.map((todo: Todo) =>
+                    <TodoGallery description={todo.description} status={todo.status}/>)
+                }</p>
         </>
     )
 }
